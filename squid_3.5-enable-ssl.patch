@@ -1,0 +1,28 @@
+diff -r -U2 squid3-3.5.12-orig/debian/rules squid3-3.5.12/debian/rules
+--- squid3-3.5.12-orig/debian/rules	2016-08-08 22:35:33.389747920 +0200
++++ squid3-3.5.12/debian/rules	2016-08-08 22:36:20.738356286 +0200
+@@ -41,4 +41,6 @@
+ 		--enable-zph-qos \
+ 		--enable-ecap \
++		--enable-ssl \
++		--enable-ssl-crtd \
+ 		--disable-translation \
+ 		--with-swapdir=/var/spool/squid \
+@@ -47,5 +49,6 @@
+ 		--with-filedescriptors=65536 \
+ 		--with-large-files \
+-		--with-default-user=proxy
++		--with-default-user=proxy \
++		--with-openssl
+ 
+ BUILDINFO := $(shell lsb_release -si 2>/dev/null)
+diff -r -U2 squid3-3.5.12-orig/src/ssl/gadgets.cc squid3-3.5.12/src/ssl/gadgets.cc
+--- squid3-3.5.12-orig/src/ssl/gadgets.cc	2016-08-08 22:35:33.497749304 +0200
++++ squid3-3.5.12/src/ssl/gadgets.cc	2016-08-08 22:36:39.022592044 +0200
+@@ -274,5 +274,5 @@
+ {
+     static int extensions[]= {
+-        NID_key_usage,
++        //NID_key_usage,
+         NID_ext_key_usage,
+         NID_basic_constraints,
